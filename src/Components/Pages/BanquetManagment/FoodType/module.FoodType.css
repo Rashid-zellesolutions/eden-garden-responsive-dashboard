@@ -1,0 +1,13 @@
+:where(.css-dev-only-do-not-override-dkbvqv).ant-space {
+    display: inline-flex;
+    width: 100%;
+}
+
+.ant-space-item {
+    width: 100% !important;
+}
+
+.ant-select {
+    width: 100%;
+    height: 35px;
+}

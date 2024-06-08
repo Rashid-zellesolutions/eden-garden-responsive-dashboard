@@ -26,7 +26,16 @@ import Users from "../Components/Pages/Users";
 import Dashboard from "../Components/Pages/dashboard/dashboard";
 import Scheduler from "../Components/Scheduler";
 import ViewAllBookingData from "../Components/ViewAllBookingData";
+import FoodCouses from "../Components/Pages/BanquetManagment/FoodCouses";
 import { useEffect } from "react";
+import FoodType from "../Components/Pages/BanquetManagment/FoodType";
+import Others from "../Components/Pages/BanquetManagment/Others";
+import ShowFoodCouses from "../Components/Pages/BanquetManagment/FoodCouses/ShowFoodCouses";
+import UpdateAppetizer from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateAppetizer";
+import UpdateMainEntries from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateMainEntries";
+import UpdateDesserts from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateDesserts";
+import UpdateTeaCoffe from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateTeaCoffe";
+import UpdateJuiceDrinks from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateJuiceDrinks";
 // import AddBookingTwo from "../Components/Pages/Booking/AddBookingTwo";
 // import Login from "../Components/Pages/Login";
 
@@ -63,6 +72,16 @@ const Routing = () => {
       <Route path="/Repair&Services/services" element={<Services />} />
       <Route path="/Repair&Services/allservicesandrepair" element={<AllServicesAndRepair />} />
       <Route path="/Repair&Services/view" element={<RepairView />} />
+      {/* Banquet Managment Routes */}
+      <Route path="/BanquetManagment/food-type" element={<FoodType />} />
+      <Route path="/BanquetManagment/food-couses" element={<FoodCouses />} />
+      <Route path="/BanquetManagment/others" element={<Others />} />
+      <Route path="/update-appetizer/:id" element={<UpdateAppetizer />} />
+      <Route path="/update-main-entry/:id" element={<UpdateMainEntries />} />
+      <Route path="/update-dessert/:id" element={<UpdateDesserts />} />
+      <Route path="/update-tea-coffe/:id" element={<UpdateTeaCoffe />} />
+      <Route path="/update-juice-drink/:id" element={<UpdateJuiceDrinks />} />
+      {/* Banquet Managment Routes End */}
       <Route path="/Settings/all-service" element={<AllSettingService />} />
       <Route path="/Settings/add-service" element={<AddSettingService />} />
       <Route path="/Settings/users" element={<Users />} />
@@ -71,6 +90,7 @@ const Routing = () => {
       <Route path="/Settings/add-attribute" element={<AddAttribute />} />
       <Route path="/Others/other" element={<Other />} />
       <Route path="/Order/order-supplies-data/:id" element={<OrderSuppliesData />} />
+      <Route path="/BanquetManagment/show-food-couses" element={<ShowFoodCouses />} />
       {/* <Route path="/Settings/all-category" element={<AllCategory />} /> */}
     </Routes>
 

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Input } from 'antd';
 import '../Pages/Booking/module.addbooking.css';
 
-const InputField = ({ placeholder, label, onChange, value, width, type, disabled, onClick, className, inputRefs, defaultValue, borderRight, borderBottomRightRadius, borderTopRightRadius }) => {
+const InputField = ({ placeholder, position, zIndex, opacity, top, left, label, name, onChange, value, width, type, disabled, onClick, className, inputRefs, defaultValue, borderRight, borderBottomRightRadius, borderTopRightRadius }) => {
   const inputRef = useRef(value);
 
   // const handleChange = (e) => {
@@ -38,7 +38,12 @@ const InputField = ({ placeholder, label, onChange, value, width, type, disabled
           background: "#fff",
           borderRight: borderRight,
           borderTopRightRadius: borderTopRightRadius,
-          borderBottomRightRadius: borderBottomRightRadius
+          borderBottomRightRadius: borderBottomRightRadius,
+          position: position,
+          top: top,
+          left: left,
+          zIndex: zIndex,
+          opacity: opacity
         }}
         placeholder={placeholder}
         value={value}
@@ -51,7 +56,7 @@ const InputField = ({ placeholder, label, onChange, value, width, type, disabled
         defaultValue={defaultValue}
         borderBottomRightRadius={borderBottomRightRadius}
         borderTopRightRadius={borderTopRightRadius}
-        
+        name={name}
       />
     </div>
   );

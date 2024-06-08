@@ -38,12 +38,12 @@ function VenueImagePopup({ isModalOpen, handleCancel, image, setImage, setLinkIm
                                         cursor: "pointer"
                                     }}
                                 >
-                                    <img
+                                    {/* <img
                                         src={Upload}
                                         alt=""
                                         width="20"
                                         style={{ marginRight: 10 }}
-                                    />
+                                    /> */}
                                     Upload Image
                                 </label>
                                 <input

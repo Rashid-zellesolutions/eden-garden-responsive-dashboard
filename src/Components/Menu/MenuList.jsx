@@ -121,6 +121,32 @@ console.log(location.pathname);
                     {/* <Menu.Item key="PaymentHistory"><Link to="/Reports/Payment-History" style={{ fontSize: "14px" }}>Payment History</Link></Menu.Item> */}
                 </Menu.SubMenu>
 
+                {/* Banquet Managment  Tab*/}
+
+                <Menu.SubMenu
+                    key="Banquet Managment"
+                    icon={<img src={selectedMenuItem === "allservicesandrepair" ? Report2 : selectedMenuItem === "repair" ? Report2 : selectedMenuItem === "services" ? Report2 : Report} alt='' width={"15px"} />}
+                    title="Banquet Managment"
+                    className='menu-font-size'
+                    style={{ /*fontSize: "14px" */}}
+                >
+                    
+                    <Menu.SubMenu 
+                        key="Food / Menu"
+                        // icon={<img src={selectedMenuItem === "foodcouses" ? Report2 : selectedMenuItem === "repair" ? Report2 : selectedMenuItem === "services" ? Report2 : Report} alt='' width={"15px"} />}
+                        title="Food / Menu"
+                        className='menu-font-size'
+                    >
+                        <Menu.Item key="food"><Link to="/BanquetManagment/food-type" style={{ /*fontSize: "14px" */}}>Food Type</Link></Menu.Item>
+                        <Menu.Item key="foodcouses"><Link to="/BanquetManagment/food-couses" style={{ /*fontSize: "14px" */}}>Food Couses</Link></Menu.Item>
+                    </Menu.SubMenu>
+                    <Menu.Item key="others"><Link to="/BanquetManagment/others" style={{/* fontSize: "14px"*/ }}>Others</Link></Menu.Item>
+                    <Menu.Item key="show-foods"><Link to="/BanquetManagment/show-food-couses" style={{/* fontSize: "14px"*/ }}>Show Foods</Link></Menu.Item>
+                    {/* <Menu.Item key="PaymentHistory"><Link to="/Reports/Payment-History" style={{ fontSize: "14px" }}>Payment History</Link></Menu.Item> */}
+                </Menu.SubMenu>
+
+                {/* Banquet Managment Tab End */}
+
                 <Menu.SubMenu key="Settings" icon={<img src={selectedMenuItem === "all-services" ? Setting2
                     : selectedMenuItem === "users" ? Setting2 : selectedMenuItem === "add-category" ? Setting2 : selectedMenuItem === "all-category" ? Setting2 : selectedMenuItem === "add-service" ? Setting2
                         : selectedMenuItem === "all-service" ? Setting2 : selectedMenuItem === "add-attribute" ? Setting2 : selectedMenuItem === "all-attribute" ? Setting2 : selectedMenuItem === "other" ? Setting2 : Setting} alt='' width={"15px"} />} title="Settings"

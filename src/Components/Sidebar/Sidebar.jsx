@@ -33,6 +33,8 @@ const Sidebar = () => {
     "/Repair&Services/repair": "Repairs",
     "/Repair&Services/services": "Services",
     "/Repair&Services/allservicesandrepair": "All Repairs And Services",
+    "/BanquetManagment/foodcouses": "Food Couses",
+    "/BanquetManagment/show-food-couses" : "Show Foods",
     "/Settings/all-services": "All Services",
     "/Settings/add-services": "Add Services",
     "/Settings/users": "Users",
