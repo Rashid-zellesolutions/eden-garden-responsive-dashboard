@@ -265,7 +265,7 @@ const FoodCouses = () => {
                             //     name={'appetizersImage'}
                             // /> 
                             <div style={{display: 'flex', width: '100%', justifyContent: 'center', flexDirection: 'column'}}>
-                                <label style={{marginTop: '-18px', marginBottom: '5px'}}>{field.label}</label>
+                                <label style={{marginTop: '-18px', color: '#73787c', fontWeight: '500', fontFamily: 'poppins !important', marginBottom: '5px'}}>{field.label}</label>
                                 <Upload 
                                     showUploadList={false}
                                     beforeUpload={false}
@@ -319,7 +319,7 @@ const FoodCouses = () => {
                     {inputFields.map((field, i) => {
                         return field.type === 'file' ?(
                             <div style={{display: 'flex', width: '100%', justifyContent: 'center', flexDirection: 'column'}}>
-                                <label style={{marginTop: '-18px', marginBottom: '5px'}}>{field.label}</label>
+                                <label style={{marginTop: '-18px', color: '#73787c', fontWeight: '500', fontFamily: 'poppins !important', marginBottom: '5px'}}>{field.label}</label>
                                 <Upload 
                                     showUploadList={false}
                                     onChange={handleMainEntriesImage}
@@ -372,7 +372,7 @@ const FoodCouses = () => {
                     {inputFields.map((field, i) => {
                         return field.type === 'file' ?( 
                             <div style={{display: 'flex', width: '100%', justifyContent: 'center', flexDirection: 'column'}}>
-                                <label style={{marginTop: '-18px', marginBottom: '5px'}}>{field.label}</label>
+                                <label style={{marginTop: '-18px', color: '#73787c', fontWeight: '500', fontFamily: 'poppins !important', marginBottom: '5px'}}>{field.label}</label>
                                 <Upload 
                                     showUploadList={false}
                                     onChange={handleDessertImage}
@@ -425,7 +425,7 @@ const FoodCouses = () => {
                     {inputFields.map((field, i) => {
                         return field.type === 'file' ?( 
                             <div style={{display: 'flex', width: '100%', justifyContent: 'center', flexDirection: 'column'}}>
-                                <label style={{marginTop: '-18px', marginBottom: '5px'}}>{field.label}</label>
+                                <label style={{marginTop: '-18px', color: '#73787c', fontWeight: '500', fontFamily: 'poppins !important', marginBottom: '5px'}}>{field.label}</label>
                                 <Upload 
                                     showUploadList={false}
                                     onChange={handleTeaCoffeImage}
@@ -478,7 +478,7 @@ const FoodCouses = () => {
                     {inputFields.map((field, i) => {
                         return field.type === 'file' ?(
                             <div style={{display: 'flex', width: '100%', justifyContent: 'center', flexDirection: 'column'}}>
-                                <label style={{marginTop: '-18px', marginBottom: '5px'}}>{field.label}</label>
+                                <label style={{marginTop: '-18px', color: '#73787c', fontWeight: '500', fontFamily: 'poppins !important', marginBottom: '5px'}}>{field.label}</label>
                                 <Upload 
                                 showUploadList={false}
                                 onChange={handleJuicesDrinksImage}

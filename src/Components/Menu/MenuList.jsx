@@ -139,9 +139,10 @@ console.log(location.pathname);
                     >
                         <Menu.Item key="food"><Link to="/BanquetManagment/food-type" style={{ /*fontSize: "14px" */}}>Food Type</Link></Menu.Item>
                         <Menu.Item key="foodcouses"><Link to="/BanquetManagment/food-couses" style={{ /*fontSize: "14px" */}}>Food Couses</Link></Menu.Item>
+                        <Menu.Item key="show-foods"><Link to="/BanquetManagment/show-food-couses" style={{/* fontSize: "14px"*/ }}>Show Foods</Link></Menu.Item>
                     </Menu.SubMenu>
                     <Menu.Item key="others"><Link to="/BanquetManagment/others" style={{/* fontSize: "14px"*/ }}>Others</Link></Menu.Item>
-                    <Menu.Item key="show-foods"><Link to="/BanquetManagment/show-food-couses" style={{/* fontSize: "14px"*/ }}>Show Foods</Link></Menu.Item>
+                    
                     {/* <Menu.Item key="PaymentHistory"><Link to="/Reports/Payment-History" style={{ fontSize: "14px" }}>Payment History</Link></Menu.Item> */}
                 </Menu.SubMenu>
 
