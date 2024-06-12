@@ -3,48 +3,54 @@ import { Space, Table, Menu, Dropdown } from 'antd';
 import { EllipsisOutlined, EditOutlined } from '@ant-design/icons';
 import { MdDeleteOutline } from "react-icons/md"
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const MainEntriesTable = () => {
+const DiningTable = () => {
 
-    const [mainEntries, setMainEntries] = useState([]);
+    const [diningData, setDiningData] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        const fetchAppetizers = async() => {
+        const fetchDining = async() => {
             try {
-                const response = await axios.get('http://localhost:8080/api/v1/MainEntries/get-main-entries')
-                console.log(response.data.mainEntriesObj)
-                setMainEntries(response.data.mainEntriesObj);
+                const response = await axios.get('http://localhost:8080/api/v1/DiningOption/get-dining-options')
+                console.log(response.data.diningObj)
+                setDiningData(response.data.diningObj);
             } catch (error) {
                 console.error("Error Fetching Data", error);
             }
         }
-        fetchAppetizers()
+        fetchDining()
     }, [])
-
-    const deleteEntry = async (id) => {
+    const deleteDining = async (id) => {
       try {
-        const response = await axios.delete(`http://localhost:8080/api/v1/MainEntries/delete-entry/${id}`)
-        console.log(response.data);
-        alert("Data Delete")
-        setMainEntries(mainEntries.filter(item => item._id !== id));
+        const response = await axios.delete(`http://localhost:8080/api/v1/DiningOption/delete-dining-data/${id}`);
+        console.log(response.status);
+        if (response.status === 200) {
+         alert("Dining Deleted");
+          // Update the state to remove the deleted item
+          setDiningData(diningData.filter(item => item._id !== id));
+        }
       } catch (error) {
         console.error("Error Deleting Data", error);
       }
     };
+    // console.log(appetizerData[0]._id)
     const handleMenuClick = (record, key) => {
       if (key === 'edit') {
-        navigate(`/update-main-entry/${record._id}`, { state: { record } });
+        // navigate(`/update-appetizer/${record._id}`, { state: { record } });
         console.log(record)
       } else if (key === 'delete') {
-        deleteEntry(record._id);
+        deleteDining(record._id);
       }
     };
+
     const menu = (record) => (
-      <Menu onClick={({ key }) => handleMenuClick(record, key)}  style={{ width: "100%", display: "flex", justifyContent: "center", flexDirection: "column", padding: "10px" }}>
+      <Menu  onClick={({ key }) => handleMenuClick(record, key)} style={{ width: "100%", display: "flex", justifyContent: "center", flexDirection: "column", padding: "10px" }}>
 
           <Menu.Item key="edit" icon={<EditOutlined style={{ fontSize: "18px" }} />}>
-              Edit
+          {/* <Link to={`/update-appetizer/${appetizerData._id}`} >Edit</Link> */}
+          edit
           </Menu.Item>
           <Menu.Item key="delete" icon={<MdDeleteOutline style={{ fontSize: "18px" }} />}>
               Delete
@@ -57,7 +63,7 @@ const columns = [
       title: 'Image',
       dataIndex: 'image',
       key: 'image',
-      render: (img) => <img src={mainEntries.mainEntriesImagePath} height={25} width={25} alt='img' />
+      render: (img) => <img src={diningData.diningImagePath} height={25} width={25} alt='img' />
     },
     {
       title: 'Name',
@@ -69,11 +75,6 @@ const columns = [
       title: 'Cost',
       dataIndex: 'cost',
       key: 'cost',
-    },
-    {
-      title: 'PacFor',
-      key: 'pacfor',
-      dataIndex: 'pacfor',
     },
     {
       title: 'Action',
@@ -92,12 +93,11 @@ const columns = [
     },
   ];
   
-  const data = mainEntries.map((item, index) => ({
+  const data = diningData.map((item, index) => ({
     key: index,
     _id: item._id,
     name: item.name,
     cost: item.cost,
-    pacfor: item.pacFor,
     img: item.img
   }));
 
@@ -110,10 +110,10 @@ const columns = [
         padding: '10px 25px', borderRadius: '4px', marginBottom: '23px'
     }}>
         <div style={{
-          marginBottom: '20px', marginTop: '10px', fontFamily: 'poppins', color: '#73787c',
-          fontWeight: '600'
-        }}>
-            <span>Main Entries</span>
+                        marginBottom: '20px', marginTop: '10px', fontFamily: 'poppins', color: '#73787c',
+                        fontWeight: '600'
+                    }}>
+            <span>Dining Option</span>
         </div>
         <div style={{width: '100%'}}>
             <Table columns={columns} dataSource={data} />
@@ -122,4 +122,4 @@ const columns = [
   )
 }
 
-export default MainEntriesTable
+export default DiningTable

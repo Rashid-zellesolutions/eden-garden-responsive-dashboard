@@ -121,7 +121,7 @@ const FoodType = () => {
         pkg.id === updatedMainEntries.packageId ? { ...pkg, mainEntries: updatedMainEntries } : pkg
       )
     }));
-    // console.log(updatedMainEntries)
+    console.log("main entries object", updatedMainEntries)
   }
   };
 

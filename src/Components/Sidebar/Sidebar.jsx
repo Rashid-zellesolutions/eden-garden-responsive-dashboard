@@ -35,6 +35,7 @@ const Sidebar = () => {
     "/Repair&Services/allservicesandrepair": "All Repairs And Services",
     "/BanquetManagment/foodcouses": "Food Couses",
     "/BanquetManagment/show-food-couses" : "Show Foods",
+    "/BanquetManagment/show-food-types" : "Show Food Types",
     "/Settings/all-services": "All Services",
     "/Settings/add-services": "Add Services",
     "/Settings/users": "Users",

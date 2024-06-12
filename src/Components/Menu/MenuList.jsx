@@ -138,11 +138,21 @@ console.log(location.pathname);
                         className='menu-font-size'
                     >
                         <Menu.Item key="food"><Link to="/BanquetManagment/food-type" style={{ /*fontSize: "14px" */}}>Food Type</Link></Menu.Item>
-                        <Menu.Item key="foodcouses"><Link to="/BanquetManagment/food-couses" style={{ /*fontSize: "14px" */}}>Food Couses</Link></Menu.Item>
+                        <Menu.Item key="food-data"><Link to="/BanquetManagment/show-food-data" style={{ /*fontSize: "14px" */}}>Show Foods</Link></Menu.Item>
+                        <Menu.Item key="foodcouses"><Link to="/BanquetManagment/food-couses" style={{ /*fontSize: "14px" */}}>Food Courses</Link></Menu.Item>
                         <Menu.Item key="show-foods"><Link to="/BanquetManagment/show-food-couses" style={{/* fontSize: "14px"*/ }}>Show Foods</Link></Menu.Item>
                     </Menu.SubMenu>
+                    <Menu.SubMenu 
+                        key="Decors"
+                        // icon={<img src={selectedMenuItem === "foodcouses" ? Report2 : selectedMenuItem === "repair" ? Report2 : selectedMenuItem === "services" ? Report2 : Report} alt='' width={"15px"} />}
+                        title="Decors"
+                        className='menu-font-size'
+                    >
+                        <Menu.Item key="add-decors"><Link to="/BanquetManagment/add-decors" style={{ /*fontSize: "14px" */}}>Add Decors</Link></Menu.Item>
+                        <Menu.Item key="decors-data"><Link to="/BanquetManagment/show-decor-data" style={{ /*fontSize: "14px" */}}>Show Decors</Link></Menu.Item>
+                    </Menu.SubMenu>
                     <Menu.Item key="others"><Link to="/BanquetManagment/others" style={{/* fontSize: "14px"*/ }}>Others</Link></Menu.Item>
-                    
+                    <Menu.Item key="others-data"><Link to="/BanquetManagment/show-others" style={{/* fontSize: "14px"*/ }}>Show Other Data</Link></Menu.Item>
                     {/* <Menu.Item key="PaymentHistory"><Link to="/Reports/Payment-History" style={{ fontSize: "14px" }}>Payment History</Link></Menu.Item> */}
                 </Menu.SubMenu>
 

@@ -36,6 +36,12 @@ import UpdateMainEntries from "../Components/Pages/BanquetManagment/FoodCouses/F
 import UpdateDesserts from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateDesserts";
 import UpdateTeaCoffe from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateTeaCoffe";
 import UpdateJuiceDrinks from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateJuiceDrinks";
+import FoodTypeData from "../Components/Pages/BanquetManagment/FoodType/FoodTypeData";
+import SingleFoodType from "../Components/Pages/BanquetManagment/FoodType/SingleFoodType";
+import UpdateFood from "../Components/Pages/BanquetManagment/FoodType/UpdateFood";
+import AddDecors from "../Components/Pages/BanquetManagment/Decor/AddDecors";
+import ShowDecor from "../Components/Pages/BanquetManagment/Decor/ShowDecor";
+import OthersData from "../Components/Pages/BanquetManagment/Others/OthersData";
 // import AddBookingTwo from "../Components/Pages/Booking/AddBookingTwo";
 // import Login from "../Components/Pages/Login";
 
@@ -81,6 +87,15 @@ const Routing = () => {
       <Route path="/update-dessert/:id" element={<UpdateDesserts />} />
       <Route path="/update-tea-coffe/:id" element={<UpdateTeaCoffe />} />
       <Route path="/update-juice-drink/:id" element={<UpdateJuiceDrinks />} />
+      <Route path="/BanquetManagment/show-food-data" element={<FoodTypeData />} />
+      <Route path="/get-single-food/:id" element={<SingleFoodType />}/>
+      <Route path="/update-food-data/:id" element={<UpdateFood />} />
+      {/* Decors Routes */}
+      <Route path="/BanquetManagment/add-decors" element={<AddDecors />}/>
+      <Route path="/BanquetManagment/show-decor-data" element={<ShowDecor />} />
+
+      <Route path="/BanquetManagment/show-others" element={<OthersData />} />
+
       {/* Banquet Managment Routes End */}
       <Route path="/Settings/all-service" element={<AllSettingService />} />
       <Route path="/Settings/add-service" element={<AddSettingService />} />
