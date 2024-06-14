@@ -11,3 +11,21 @@
     width: 100%;
     height: 35px;
 }
+
+
+.food-type-container {
+    padding: 20px;
+  }
+  
+  .package-container {
+    margin-bottom: 40px;
+  }
+  
+  .package-section {
+    margin-top: 20px;
+  }
+  
+  .package-section h3 {
+    margin-bottom: 10px;
+  }
+  

@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
 const UpdateAppetizer = () => {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [appetizerData, setAppetizerData] = useState({
         name: '',
         cost: '',
@@ -15,15 +15,15 @@ const UpdateAppetizer = () => {
         appetizerImage: null
     })
     const {id} = useParams()
-    console.log(id)
-    setTimeout(() => {
-        setLoading(false);
-    }, 2000)
+    console.log("Appetizer Id : ", id)
+    // setTimeout(() => {
+    //     setLoading(false);
+    // }, 2000)
     useEffect(() => {
         const fetchSingleProduct = async() => {
             try {
                 const response = await axios.get(`http://localhost:8080/api/v1/Appetizers/get-single-appetizer/${id}`)
-                // console.log(response.data.appetizerObj)
+                console.log(response.data.appetizerObj)
                 setAppetizerData(response.data.appetizerObj)
             } catch (error) {
                 console.error("Error Feching Data", error);

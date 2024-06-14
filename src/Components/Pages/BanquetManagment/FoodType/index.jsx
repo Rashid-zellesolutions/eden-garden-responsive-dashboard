@@ -6,7 +6,7 @@ import Checkbox from 'antd/es/checkbox/Checkbox';
 import './module.FoodType.css'
 import axios from 'axios';
 
-const FoodType = () => {
+const FoodTypeTwoo = () => {
   const [loading, setLoading] = useState(true);
   const [isCheck, setIsCheck] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
@@ -20,16 +20,7 @@ const FoodType = () => {
   const [formData, setFormData] = useState({
     foodType: '',
     value: '', // This field corresponds to the 'value' property in the schema
-    packages: [
-        {
-            name: '', // This field corresponds to the 'name' property in each package
-            appetizers: null, // These fields correspond to the 'appetizers', 'mainEntries', 'desserts', 'teaCoffe', and 'juicesDrinks' properties in each package
-            mainEntries: null,
-            desserts: null,
-            teaCoffe: null,
-            juicesDrinks: null
-        }
-    ]
+    packages: []
 });
 
   setTimeout(() => {
@@ -78,33 +69,35 @@ const FoodType = () => {
     }));
   };
 
+  // const handlePackageName = (e) => {
+  //   const { value } = e.target;
+
+  //   setFormData(prevFormData => ({
+  //     ...prevFormData,
+  //     packages: prevFormData.packages.map((pkg, index) =>
+  //       index === 0 ? { ...pkg, name: value } : pkg
+  //     )
+  //   }));
+  // };
   const handlePackageName = (e) => {
     const { value } = e.target;
-
-    setFormData(prevFormData => ({
+    setFormData((prevFormData) => ({
       ...prevFormData,
-      packages: prevFormData.packages.map((pkg, index) =>
-        index === 0 ? { ...pkg, name: value } : pkg
-      )
+      packages: [{ ...prevFormData.packages[0], name: value }]
     }));
   };
 
-  const handleAppetizerPackage = (value, option) => {
-    // Find the selected appetizer object based on the selected value
-    const selectedAppetizer = appetizers.find(item => item.name === value);
-
-    if(selectedAppetizer){
-
-    const updatedAppetizer = {...selectedAppetizer, constant: 'true'}
-    // Update the form data with the selected appetizer object
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      packages: prevFormData.packages.map(pkg =>
-        pkg.id === updatedAppetizer.packageId ? { ...pkg, appetizers: updatedAppetizer } : pkg
-      )
-    }));
-  }
-  };
+  const handleAppetizerPackage = (value) => {
+    const selectedItems = value.map(name => appetizers.find(item => item.name === name));
+    
+    setFormData(prevState => {
+        const updatedPackages = prevState.packages.map(pkg => ({
+            ...pkg,
+            appetizers: selectedItems
+        }));
+        return { ...prevState, packages: updatedPackages };
+    });
+};
 
   const handleMainEntriesPackage = (value, option) => {
     // Find the selected appetizer object based on the selected value
@@ -297,6 +290,7 @@ const FoodType = () => {
                     <Space wrap>
                       <Select
                         defaultValue="Appetizers"
+                        mode='multiple'
                         onChange={handleAppetizerPackage}
                         options={appetizers.map(item => ({
                           value: item.name,
@@ -420,4 +414,4 @@ const FoodType = () => {
   )
 }
 
-export default FoodType
+export default FoodTypeTwoo

@@ -32,10 +32,10 @@ const FoodTypeData = () => {
             }}>
                 <span>Food Types</span>
             </div>
-            <div style={{width: '100%', display: 'flex', gap: '15px'}}>
+            <div style={{width: '100%', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '15px'}}>
             {foodData.map((items, i) => {
                 return <div style={{width: '100%'}}>
-                    <Link to={`/get-single-food/${items._id}`}>
+                    <Link to={`/get-single-food/${items._id}`} style={{ textDecoration: 'none' }}>
                     <InputField 
                         width={'100%'}
                         name={items.foodType}
