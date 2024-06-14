@@ -43,6 +43,7 @@ import UpdateFood from "../Components/Pages/BanquetManagment/FoodType/UpdateFood
 import AddDecors from "../Components/Pages/BanquetManagment/Decor/AddDecors";
 import ShowDecor from "../Components/Pages/BanquetManagment/Decor/ShowDecor";
 import OthersData from "../Components/Pages/BanquetManagment/Others/OthersData";
+import AddFood from "../Components/Pages/BanquetManagment/FoodType/AddFood";
 // import AddBookingTwo from "../Components/Pages/Booking/AddBookingTwo";
 // import Login from "../Components/Pages/Login";
 
@@ -80,6 +81,7 @@ const Routing = () => {
       <Route path="/Repair&Services/allservicesandrepair" element={<AllServicesAndRepair />} />
       <Route path="/Repair&Services/view" element={<RepairView />} />
       {/* Banquet Managment Routes */}
+      <Route path="/BanquetManagment/food-packages" element={<AddFood />} />
       <Route path="/BanquetManagment/food-type" element={<FoodType />} />
       <Route path="/BanquetManagment/food-couses" element={<FoodCouses />} />
       <Route path="/BanquetManagment/others" element={<Others />} />

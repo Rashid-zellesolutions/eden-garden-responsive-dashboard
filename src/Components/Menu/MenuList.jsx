@@ -137,6 +137,7 @@ console.log(location.pathname);
                         title="Food / Menu"
                         className='menu-font-size'
                     >
+                        <Menu.Item key="food-packages"><Link to="/BanquetManagment/food-packages" style={{ /*fontSize: "14px" */}}>Food Packages</Link></Menu.Item>
                         <Menu.Item key="food"><Link to="/BanquetManagment/food-type" style={{ /*fontSize: "14px" */}}>Food Type</Link></Menu.Item>
                         <Menu.Item key="food-data"><Link to="/BanquetManagment/show-food-data" style={{ /*fontSize: "14px" */}}>Show Foods</Link></Menu.Item>
                         <Menu.Item key="foodcouses"><Link to="/BanquetManagment/food-couses" style={{ /*fontSize: "14px" */}}>Food Courses</Link></Menu.Item>
