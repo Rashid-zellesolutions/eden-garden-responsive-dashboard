@@ -417,7 +417,7 @@ const Dinner = () => {
                 <span>Dinner</span>
             </div>
         <div style={{width: '100%'}}>
-            <Table columns={columns} dataSource={data} locale={customLocale} pagination={foodType.length > 5 ? { pageSize: 5 } : false} />
+            <Table columns={columns} dataSource={data} locale={customLocale} pagination={{ defaultPageSize: 5, hideOnSinglePage: true }} />
         </div>
             <div style={{width: '100%', display: 'flex', justifyContent: 'end', marginTop: '10px', marginBottom: '10px'}}>
                 <Button type="primary" htmlType="submit"
