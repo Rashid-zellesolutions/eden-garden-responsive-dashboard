@@ -4,8 +4,10 @@ import InputField from '../../../../InputField';
 import { Table, Select, Button, Dropdown, Menu } from 'antd';
 import { EllipsisOutlined, EditOutlined } from '@ant-design/icons';
 import { MdDeleteOutline } from "react-icons/md"
+import DeletePopup from '../../../../DeletePopup';
+import SuccessPopup from '../../../../SuccessPopup';
 
-const Baverages = () => {
+const BreakFast = () => {
     const [packageVisible, setPackageVisible] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [currentRecord, setCurrentRecord] = useState(null);
@@ -14,7 +16,26 @@ const Baverages = () => {
     const [mainEntries, setMainEntries] = useState([]);
     const [desserts, setDesserts] = useState([]);
     const [teaCoffe, setTeaCoffe] = useState([]);
+    const [successPopupOpen, setSuccessPopupOpen] = useState(false)
+    const [successPopupMessage, setSuccessPopupMessage] = useState(false)
     const [juicesDrinks, setJuicesDrinks] = useState([]);
+    const [deleteModal, setDeleteModal] = useState(false);
+    const [deleteData, setDeleteData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
+    const handleOpenDeletePopup = (record) => {
+        setDeleteData(record);
+        setDeleteModal(true);
+    };
+
+    const handleCloseDeletePopup = () => {
+        setDeleteModal(false);
+        setDeleteData(null);
+    };
+    const handleCloseSuccessPopup = () => {
+        setSuccessPopupOpen(false)
+    }
 
     const [formData, setFormData] = useState({
         foodType: 'Baverages',
@@ -31,23 +52,7 @@ const Baverages = () => {
         },
         ],
     });
-
-    // const handleArrayChange = (e, arrayName, index) => {
-    //     const { value } = e.target;
-    //     setFormData((prevFormData) => {
-    //       const newArray = [...prevFormData.packages[0][arrayName]];
-    //       newArray[index] = value;
-    //       return {
-    //         ...prevFormData,
-    //         packages: [
-    //           {
-    //             ...prevFormData.packages[0],
-    //             [arrayName]: newArray,
-    //           },
-    //         ],
-    //       };
-    //     });
-    //   };
+    const shouldShowPagination = formData.length > 1;
 
     useEffect(() => {
         const fetchPackagesData = async () => {
@@ -76,44 +81,82 @@ const Baverages = () => {
         }
         };
 
-        fetchPackagesData();
-    }, []);
+        if (formSubmitted) {
+            fetchPackagesData(); // Fetch data if formSubmitted is true
+            setFormSubmitted(false); // Reset formSubmitted to false
+          }
+    }, [formSubmitted]);
 
-    const deleteBaverage = async (id) => {
+    useEffect(() => {
+        const fetchPackagesData = async () => {
         try {
-        const response = await axios.delete(`http://localhost:8080/api/v1/FoodType/delete-food-type/${id}`);
-        console.log(response.status);
-        if (response.status === 200) {
-        alert("Baverage Package Deleted");
-        setFoodType(prevFoodType => prevFoodType.filter(item => item._id !== id));
-        }
-        } catch (error) {
-        console.error("Error Deleting Data", error);
-        }
-    };
+            const appetizerResponse = await axios.get('http://localhost:8080/api/v1/Appetizers/get-appetizer');
+            setAppetizers(appetizerResponse.data.appetizerObj);
 
+            const mainEntriesResponse = await axios.get('http://localhost:8080/api/v1/MainEntries/get-main-entries');
+            setMainEntries(mainEntriesResponse.data.mainEntriesObj);
+
+            const dessertResponse = await axios.get('http://localhost:8080/api/v1/Dessert/get-dessert');
+            setDesserts(dessertResponse.data.dessertObj);
+
+            const teaCoffeResponse = await axios.get('http://localhost:8080/api/v1/TeaCoffee/get-tea-coffee');
+            setTeaCoffe(teaCoffeResponse.data.teaCoffeObj);
+
+            const juicesDrinksResponse = await axios.get('http://localhost:8080/api/v1/JuicesDrinks/get-juices-drinks');
+            setJuicesDrinks(juicesDrinksResponse.data.juiceDrinkObj);
+
+            const foodTypeResponse = await axios.get('http://localhost:8080/api/v1/FoodType/get-food-type')
+            console.log(foodTypeResponse.data.foodTypeObj)
+            setFoodType(foodTypeResponse.data.foodTypeObj)
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+        };
+
+            fetchPackagesData(); 
+    }, []);
 
     const handleMenuClick = (record, key) => {
         if (key === 'edit') {
-        setIsEditing(true);
-        setCurrentRecord(record);
-        setPackageVisible(true)
+            setIsEditing(true);
+            setCurrentRecord(record);
+            setPackageVisible(true);
     
-        // Pre-fill the form with the current record's data
-        setFormData({
-            foodType: record.foodType,
-            packages: [{
-            name: record.name,
-            descriptions: record.descriptions || '',
-            appetizers: record.appetizers || [],
-            mainEntries: record.mainEntries || [],
-            desserts: record.desserts || [],
-            teaCoffe: record.teaCoffe || [],
-            juicesDrinks: record.juicesDrinks || [],
-            }],
-        });
+            // Pre-fill the form with the current record's data
+            setFormData({
+                foodType: record.foodType,
+                packages: [{
+                    name: record.name,
+                    descriptions: record.descriptions || '',
+                    appetizers: record.appetizers || [],
+                    mainEntries: record.mainEntries || [],
+                    desserts: record.desserts || [],
+                    teaCoffe: record.teaCoffe || [],
+                    juicesDrinks: record.juicesDrinks || [],
+                }],
+            });
         } else if (key === 'delete') {
-        deleteBaverage(record._id);
+            handleOpenDeletePopup(record);
+        }
+    };
+
+    const handleDeleteService = async (id) => {
+        try {
+            await axios.delete(`http://localhost:8080/api/v1/FoodType/delete-food-type/${id}`);
+            console.log('Food Type deleted successfully');
+            // fetchTableData(); // Refresh the table data
+            setFoodType(prevFoodType => prevFoodType.filter(item => item._id !== id));
+        } catch (error) {
+            console.error("Error deleting food type", error);
+            console.error('Failed to delete food type');
+        }
+    };
+    
+    const handleDeleteConfirm = () => {
+        if (deleteData) {
+            handleDeleteService(deleteData._id);
+            handleCloseDeletePopup();
         }
     };
 
@@ -121,10 +164,9 @@ const Baverages = () => {
         <Menu  onClick={({ key }) => handleMenuClick(record, key)} style={{ width: "100%", display: "flex", justifyContent: "center", flexDirection: "column", padding: "10px" }}>
 
             <Menu.Item key="edit" icon={<EditOutlined style={{ fontSize: "18px" }} />}>
-            {/* <Link to={`/update-appetizer/${appetizerData._id}`} >Edit</Link> */}
             edit
             </Menu.Item>
-            <Menu.Item key="delete" icon={<MdDeleteOutline style={{ fontSize: "18px" }} />}>
+            <Menu.Item key="delete" onClick={() => handleOpenDeletePopup(record)} icon={<MdDeleteOutline style={{ fontSize: "18px" }} />}>
                 Delete
             </Menu.Item>
         </Menu>
@@ -240,16 +282,35 @@ const Baverages = () => {
         try {
         if (isEditing && currentRecord) {
             const response = await axios.put(`http://localhost:8080/api/v1/FoodType/update-food-type/${currentRecord._id}`, formData);
-            alert("Food Type Updated");
-            console.log("Food Type", response);
+            // alert("Food Type Updated");
+            setSuccessPopupOpen(true)
+            setSuccessPopupMessage("Data Added")
         } else {
             const response = await axios.post('http://localhost:8080/api/v1/FoodType/add-food-type', formData);
-            alert("Food Type Added");
+            // alert("Food Type Added");
+            setSuccessPopupOpen(true)
+            setSuccessPopupMessage("Data Added")
             console.log("Food Type", response);
         }
-    
-        // Refresh the page after successful submission
-        window.location.reload();
+        
+        setFormSubmitted(true);
+        setPackageVisible(false);
+        setIsEditing(false);
+        setCurrentRecord(null);
+        setFormData({
+            foodType: 'BreakFast',
+            packages: [
+                {
+                    name: '',
+                    descriptions: '',
+                    appetizers: [],
+                    mainEntries: [],
+                    desserts: [],
+                    teaCoffe: [],
+                    juicesDrinks: [],
+                },  
+            ],
+        });
         } catch (error) {
         console.error("error Adding/Updating Food Type", error);
         }
@@ -377,7 +438,7 @@ const Baverages = () => {
     }
 
     const data = foodType.flatMap((item, index) => {
-        if (item.foodType === "Baverages" || item.foodType === 'baverages' || item.foodType === 'BAVERAGES') {
+        if (item.foodType === "Baverages" || item.foodType === 'BAVERAGES' || item.foodType === 'baverages') {
         return item.packages.map((pkg, pkgIndex) => {
             const totalCost = calculateTotalCost(pkg);
     
@@ -416,11 +477,11 @@ const Baverages = () => {
                 }}>
                 <span>Baverages</span>
             </div>
-        <div style={{width: '100%'}}>
-            <Table columns={columns} dataSource={data} locale={customLocale} pagination={{ defaultPageSize: 5, hideOnSinglePage: true }} />
+        <div style={{width: '100%', padding: '0px 10px'}}>
+            <Table columns={columns} dataSource={data} locale={customLocale} pagination={shouldShowPagination ? { pageSize: 2 } : false} />
         </div>
-            <div style={{width: '100%', display: 'flex', justifyContent: 'end', marginTop: '10px', marginBottom: '10px'}}>
-                <Button type="primary" htmlType="submit"
+            <div style={{width: '100%', display: 'flex', padding: '0px 10px', justifyContent: 'start', marginTop: '10px', marginBottom: '10px'}}>
+                {packageVisible ? <h3>Add Baverages</h3> : <Button type="primary" htmlType="submit"
                 style={{
                     display: 'inline-block',
                     height: '35px',
@@ -432,10 +493,11 @@ const Baverages = () => {
                 className="custom-hover-btn"
                 onClick={addPackages}
                 >
-                {packageVisible ? "Hide Packages" : "Add Packages"}
-                </Button>
+                Add Packages
+                </Button>}
+                
             </div>
-        {packageVisible && <div style={{width: '100%', padding: '10px 25px'}}>
+        {packageVisible && <div style={{width: '100%',  padding: '10px'}}>
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>
                 <div style={{width: '100%', display: 'flex', flexDirection: 'column'}}>
                 <div style={{width: '100%', display: 'flex', gap: '15px'}}>
@@ -480,6 +542,7 @@ const Baverages = () => {
                         placeholder="Select Appetizers"
                         value={formData.packages[0].appetizers.map(item => item.name)}
                         onChange={handleAppetizerPackage}
+                        maxTagCount={1}
                         style={{ width: '100%' }}
                         >
                         {appetizers.map((appetizer) => (
@@ -496,6 +559,7 @@ const Baverages = () => {
                         placeholder="Select Main Entries"
                         value={formData.packages[0].mainEntries.map(item => item.name)}
                         onChange={handleMainEntriesPackage}
+                        maxTagCount={1}
                         style={{ width: '100%' }}
                         >
                         {mainEntries.map((entry) => (
@@ -512,6 +576,7 @@ const Baverages = () => {
                         placeholder="Select Desserts"
                         value={formData.packages[0].desserts.map(item => item.name)}
                         onChange={handleDessertPackage}
+                        maxTagCount={1}
                         style={{ width: '100%' }}
                         >
                         {desserts.map((dessert) => (
@@ -524,13 +589,14 @@ const Baverages = () => {
                     
                 </div>
                 <div style={{width: '100%', display: 'flex', gap: '15px'}}>
-                    <div style={{ width: '33%' }}>
+                    <div style={{ width: '33%', marginTop: '10px' }}>
                         <label style={{ display: 'block', marginBottom: '5px' }}>Tea/Coffee</label>
                         <Select
                         mode="multiple"
                         placeholder="Select Tea/Coffee"
                         value={formData.packages[0].teaCoffe.map(item => item.name)}
                         onChange={handleTeaCoffePackage}
+                        maxTagCount={1}
                         style={{ width: '100%' }}
                         >
                         {teaCoffe.map((tea) => (
@@ -547,6 +613,7 @@ const Baverages = () => {
                         placeholder="Select Juices/Drinks"
                         value={formData.packages[0].juicesDrinks.map(item => item.name)}
                         onChange={handleJuicesDrinksPackage}
+                        maxTagCount={1}
                         style={{ width: '100%' }}
                         >
                         {juicesDrinks.map((juice) => (
@@ -575,8 +642,16 @@ const Baverages = () => {
             </form>
             </div>}
         </div>
+        <SuccessPopup isModalOpen={successPopupOpen} handleCancel={handleCloseSuccessPopup} label={successPopupMessage} />
+        <DeletePopup 
+             isModalOpen={deleteModal}
+             handleCancel={handleCloseDeletePopup}
+             Delete={handleDeleteConfirm}
+             name={deleteData?.foodType}
+             setLoading={setLoading}
+        />
         </>
     );
 }
 
-export default Baverages
+export default BreakFast

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const AppetizerTable = () => {
-
+  
     const [appetizerData, setAppetizerData] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
@@ -22,6 +22,7 @@ const AppetizerTable = () => {
         }
         fetchAppetizers()
     }, [])
+    const shouldShowPagination = appetizerData.length > 1;
     const deleteAppetizer = async (id) => {
       try {
         const response = await axios.delete(`http://localhost:8080/api/v1/Appetizers/delete-appetizer/${id}`);
@@ -122,7 +123,7 @@ const columns = [
             <span>Appetizers</span>
         </div>
         <div style={{width: '100%'}}>
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={data} pagination={shouldShowPagination ? { pageSize: 5 } : false}/>
         </div>
     </div>
   )

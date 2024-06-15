@@ -29,7 +29,7 @@ import ViewAllBookingData from "../Components/ViewAllBookingData";
 import FoodCouses from "../Components/Pages/BanquetManagment/FoodCouses";
 import { useEffect } from "react";
 // import FoodType from "../Components/Pages/BanquetManagment/FoodType";
-import FoodType from "../Components/Pages/BanquetManagment/FoodType/MultiFoodType";
+// import FoodType from "../Components/Pages/BanquetManagment/FoodType/MultiFoodType";
 import Others from "../Components/Pages/BanquetManagment/Others";
 import ShowFoodCouses from "../Components/Pages/BanquetManagment/FoodCouses/ShowFoodCouses";
 import UpdateAppetizer from "../Components/Pages/BanquetManagment/FoodCouses/FoodCousesComponents/UpdateAppetizer";
@@ -44,6 +44,8 @@ import AddDecors from "../Components/Pages/BanquetManagment/Decor/AddDecors";
 import ShowDecor from "../Components/Pages/BanquetManagment/Decor/ShowDecor";
 import OthersData from "../Components/Pages/BanquetManagment/Others/OthersData";
 import AddFood from "../Components/Pages/BanquetManagment/FoodType/AddFood";
+// import FoodCoursec from "../Components/Pages/BanquetManagment/FoodType/FoodPackages/FoodCoursec";
+import Courses from "../Components/Pages/BanquetManagment/FoodType/Courses";
 // import AddBookingTwo from "../Components/Pages/Booking/AddBookingTwo";
 // import Login from "../Components/Pages/Login";
 
@@ -82,8 +84,8 @@ const Routing = () => {
       <Route path="/Repair&Services/view" element={<RepairView />} />
       {/* Banquet Managment Routes */}
       <Route path="/BanquetManagment/food-packages" element={<AddFood />} />
-      <Route path="/BanquetManagment/food-type" element={<FoodType />} />
-      <Route path="/BanquetManagment/food-couses" element={<FoodCouses />} />
+      {/* <Route path="/BanquetManagment/food-type" element={<FoodCoursec />} /> */}
+      <Route path="/BanquetManagment/food-couses" element={<Courses />} />
       <Route path="/BanquetManagment/others" element={<Others />} />
       <Route path="/update-appetizer/:id" element={<UpdateAppetizer />} />
       <Route path="/update-main-entry/:id" element={<UpdateMainEntries />} />
